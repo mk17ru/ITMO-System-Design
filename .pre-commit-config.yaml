@@ -1,0 +1,33 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-format
+        name: ruff-format
+        entry: poetry run ruff format
+        language: system
+        types: [python]
+      - id: ruff-check
+        name: ruff-check
+        entry: poetry run ruff check --fix
+        language: system
+        types: [python]
+      - id: mypy
+        name: mypy
+        entry: poetry run mypy
+        language: system
+        types: [python]
+        exclude: >
+          (?x)^(
+            tests/
+          )
+      - id: sort-pyproject-toml
+        name: sort-pyproject-toml
+        entry: toml-sort --ignore-case --in-place --sort-first tool.poetry,tool.poetry.dependencies.python --sort-table-keys --sort-inline-arrays
+        language: system
+        files: "pyproject.toml"
+      - id: poetry-check-lock
+        name: poetry-check-lock
+        entry: poetry check --lock
+        language: system
+        pass_filenames: false
+        files: "pyproject.toml"
