@@ -1,23 +1,60 @@
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
 [tool.poetry]
-name = "system"
-version = "0.1.0"
-description = ""
-readme = "README.md"
 authors = ["Mihail Frolov <m@mail.ru>"]
+description = ""
+name = "system"
+readme = "README.md"
+version = "0.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-uvicorn = "^0.30.6"
 fastapi = "^0.114.2"
 requests = "^2.32.3"
+uvicorn = "^0.30.6"
 
-[tool.poetry.group.test.dependencies]
-pytest = "^8.3.3"
+[tool.poetry.group.dev.dependencies]
+async-asgi-testclient = "^1.4.11"
 faker = "^30.0.0"
 httpx = "^0.27.2"
-async-asgi-testclient = "^1.4.11"
+mypy = "^1.11.2"
+pre-commit = "^4.0.1"
+pytest = "^8.3.3"
 pytest-asyncio = "^0.24.0"
+ruff = "^0.6.9"
+toml-sort = "^0.23.1"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.mypy]
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+ignore_errors = true
+module = "tests.*"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+filterwarnings = [
+  "ignore::UserWarning:ramp.logging..+"
+]
+testpaths = ["tests/"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.format]
+preview = true
+quote-style = "preserve"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+
+[tool.ruff.lint.per-file-ignores]
+"**/{tests}/*" = ["PLR2004", "T201"]
+
+[tool.ruff.lint.pycodestyle]
+max-line-length = 120
