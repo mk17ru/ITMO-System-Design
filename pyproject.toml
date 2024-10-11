@@ -3,7 +3,7 @@ name = "system"
 version = "0.1.0"
 description = ""
 readme = "README.md"
-authors = ["Mihail Frolov m@mail.ru"]
+authors = ["Mihail Frolov <m@mail.ru>"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
