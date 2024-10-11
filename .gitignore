@@ -4,6 +4,7 @@
 !.gitignore
 !.gitattributes
 !.gitmodules
+!.pre-commit-config.yaml
 
 # file types
 *.pyc
