@@ -18,11 +18,17 @@ release = '0.1.0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon', 'autodocsumm', 'sphinx.ext.coverage']
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'autodocsumm',
+    'sphinx.ext.coverage',
+    'sphinx_markdown_builder',
+]
 auto_doc_default_options = {'autosummary': True}
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['build/*']
 
 language = 'ru'
 

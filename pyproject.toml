@@ -31,6 +31,7 @@ pytest = "^8.3.3"
 pytest-asyncio = "^0.24.0"
 ruff = "^0.6.9"
 sphinx = "^8.1.1"
+sphinx-markdown-builder = "^0.6.7"
 sphinx-rtd-theme = "^3.0.1"
 toml-sort = "^0.23.1"
 
