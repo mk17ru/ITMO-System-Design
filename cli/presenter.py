@@ -3,8 +3,6 @@ import sys
 
 
 class Presenter:
-    """"""
-
     def __init__(self, output_stream: typing.TextIO = sys.stdout) -> None:
         self.output_stream = output_stream
 
