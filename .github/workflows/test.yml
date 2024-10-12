@@ -24,5 +24,9 @@ jobs:
         uses: abatilo/actions-poetry@v2
       - name: Install dependencies with poetry
         run: poetry install
+      - name: Install pre-commit
+        run: poetry run pip install pre-commit
+      - name: Run pre-commit hooks
+        run: poetry run pre-commit run --all-files
       - name: Run tests
         run: poetry run pytest -vv --strict --showlocals
