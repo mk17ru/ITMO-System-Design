@@ -1,6 +1,6 @@
 import pathlib
 
-import base_command
+import cli.commands.base_command as base_command
 
 
 class CatCommand(base_command.BaseCommand):

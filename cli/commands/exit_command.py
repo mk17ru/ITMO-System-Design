@@ -1,6 +1,6 @@
 import sys
 
-import base_command
+import cli.commands.base_command as base_command
 
 
 class ExitCommand(base_command.BaseCommand):

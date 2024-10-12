@@ -1,6 +1,6 @@
 import subprocess
 
-import base_command
+import cli.commands.base_command as base_command
 
 
 class ExternalCommand(base_command.BaseCommand):

@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from src.commands.exit_command import ExitCommand
+from cli.commands.exit_command import ExitCommand
 
 
 class TestExitCommand:

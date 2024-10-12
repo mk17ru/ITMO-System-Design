@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from io import StringIO
 from pathlib import Path
-from src.commands.cat_command import CatCommand
+from cli.commands.cat_command import CatCommand
 
 
 class TestCatCommand:

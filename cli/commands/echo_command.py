@@ -1,4 +1,4 @@
-import base_command
+import cli.commands.base_command as base_command
 
 
 class EchoCommand(base_command.BaseCommand):

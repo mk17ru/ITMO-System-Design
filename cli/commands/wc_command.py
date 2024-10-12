@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional, TextIO, Tuple
 
-import base_command
+import cli.commands.base_command as base_command
 
 
 class WcCommand(base_command.BaseCommand):

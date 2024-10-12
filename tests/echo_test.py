@@ -1,6 +1,6 @@
 import pytest
 from io import StringIO
-from src.commands.echo_command import EchoCommand
+from cli.commands.echo_command import EchoCommand
 
 
 class TestEchoCommand:

@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from io import StringIO
 from pathlib import Path
 
-from src.commands.wc_command import WcCommand
+from cli.commands.wc_command import WcCommand
 
 
 class TestWcCommand:
