@@ -1,6 +1,14 @@
 cli package
 ===========
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cli.commands
+
 Submodules
 ----------
 

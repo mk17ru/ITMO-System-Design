@@ -3,10 +3,10 @@ repos:
     hooks:
       - id: py-docstrings
         name: py-docstrings
-        entry: bash -c 'for file in "$@"; do poetry run doq -w -f $file -t ./docs/pydoq_templates; done'
+        entry: poetry run doq -w -d ./cli -r -t ./docs/pydoq_templates
         language: system
         types: [python]
-        files: ^cli/.
+        pass_filenames: false
       - id: ruff-format
         name: ruff-format
         entry: poetry run ruff format

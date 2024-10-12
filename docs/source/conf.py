@@ -8,7 +8,17 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('../../'))
+# it's required to support imports in Sphinx generated .rst files
+sys.path.append(os.path.abspath('../../'))
+cli_path = os.path.abspath('../../cli')
+sys.path.append(cli_path)
+
+for root, dirs, files in os.walk(cli_path):
+    for dir_name in dirs:
+        dir_path = os.path.join(root, dir_name)
+        sys.path.append(os.path.abspath(dir_path))
+
+# Теперь все поддиректории внутри cli добавлены в sys.path
 
 project = 'itmo-software-design'
 copyright = '2024, Nikita Stepanov && Michael Frolov && Arseny Brothers [Arseny Vityazev && Arseny Schevchenko]'
