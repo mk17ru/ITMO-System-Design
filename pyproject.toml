@@ -3,20 +3,21 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.poetry]
-authors = ["Mihail Frolov <m@mail.ru>"]
-description = ""
+authors = ["Nikita Stepanov && Michael Frolov && Arseny Brothes [Arseny Vityazev && Arseny Schevchenko]"]
+description = "Itmo Software Design"
 name = "system"
 readme = "README.md"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-fastapi = "^0.114.2"
+fastapi = "^0.115"
 requests = "^2.32.3"
-uvicorn = "^0.30.6"
+uvicorn = "^0.31.1"
 
 [tool.poetry.group.dev.dependencies]
 async-asgi-testclient = "^1.4.11"
+autodocsumm = "^0.2.13"
 faker = "^30.0.0"
 httpx = "^0.27.2"
 mypy = "^1.11.2"
@@ -24,6 +25,8 @@ pre-commit = "^4.0.1"
 pytest = "^8.3.3"
 pytest-asyncio = "^0.24.0"
 ruff = "^0.6.9"
+sphinx = "^8.1.1"
+sphinx-rtd-theme = "^3.0.1"
 toml-sort = "^0.23.1"
 
 [tool.mypy]
@@ -33,7 +36,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 ignore_errors = true
-module = "tests.*"
+module = [
+  "docs.*",
+  "tests.*"
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
@@ -58,3 +64,6 @@ lines-after-imports = 2
 
 [tool.ruff.lint.pycodestyle]
 max-line-length = 120
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
