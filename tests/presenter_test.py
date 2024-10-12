@@ -4,7 +4,7 @@ from io import StringIO
 from cli.presenter import Presenter
 
 
-# Тесты для Presenter
+#  Тесты для Presenter
 
 
 def test_show_message_to_stdout():
