@@ -12,20 +12,20 @@ def test_show_message_to_stdout():
     presenter = Presenter(output_stream=output)
 
     # Выводим данные
-    data = "Hello, World!"
+    data = 'Hello, World!'
     presenter.show(data)
 
-    assert output.getvalue() == "Hello, World!\n"
+    assert output.getvalue() == 'Hello, World!\n'
 
 
 def test_show_message_to_custom_stream():
     output = StringIO()
     presenter = Presenter(output_stream=output)
 
-    data = "Test data"
+    data = 'Test data'
     presenter.show(data)
 
-    assert output.getvalue() == "Test data\n"
+    assert output.getvalue() == 'Test data\n'
 
 
 def test_show_message_with_default_stdout():
@@ -34,9 +34,9 @@ def test_show_message_with_default_stdout():
 
     presenter = Presenter(sys.stdout)
 
-    data = "Default stdout data"
+    data = 'Default stdout data'
     presenter.show(data)
 
     sys.stdout = sys.__stdout__
 
-    assert output.getvalue() == "Default stdout data\n"
+    assert output.getvalue() == 'Default stdout data\n'

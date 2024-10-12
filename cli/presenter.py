@@ -1,17 +1,23 @@
-"""Модуль с реализацией компонента Presenter."""
+"""Presenter component module."""
 
 import typing
 import sys
 
 
 class Presenter:
-    """Класс Presenter."""
+    """Presenter logic."""
 
     def __init__(self, output_stream: typing.TextIO = sys.stdout) -> None:
-        """Инициализация."""
         self.output_stream = output_stream
 
     def show(self, data: str) -> None:
-        """:param data: str:"""
+        """Summary of show.
+
+        Args:
+            data (str): Description of data.
+
+        Returns:
+            None: Description of return value
+        """
         self.output_stream.write(data + '\n')
         self.output_stream.flush()
