@@ -30,6 +30,5 @@ poetry run pytest -vv --showlocals
 Если хотим обновить пользовательскую документацию
 1) Для обновления ```source``` файлов ```Sphinx``` в корне проекта запускаем: ```sphinx-apidoc -f -o ./docs/source ./cli```
 2) Создание новой версии ```Markdown```: ```cd docs && make markdown```
->>>>>>> cc3e4c4 (small fix)
 ## Запуск 
 ### TODO 
