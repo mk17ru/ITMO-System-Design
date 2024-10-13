@@ -1,19 +1,56 @@
 """Module with Base Command class."""
 
-from abc import ABC, abstractmethod
 import sys
-from typing import Any, Optional, TextIO, List
+import typing
+from abc import ABC, abstractmethod
+from typing import Any
 
 
 class BaseCommand(ABC):
     """Base class for all commands."""
 
-    def __init__(self, stdin: TextIO = sys.stdin, stdout: TextIO = sys.stdout):
+    def __init__(self, stdin: typing.TextIO = sys.stdin, stdout: typing.TextIO = sys.stdout):
         self.stdin = stdin
         self.stdout = stdout
-        self.args: List[Any] = []
+        self.args: list[Any] = []
 
-    def set_args(self, args: List[Any]) -> None:
+    @property
+    def stdin(self) -> typing.TextIO:
+        """Summary of stdin.
+
+        Returns:
+            TextIO: Description of return value
+        """
+        return self._stdin
+
+    @stdin.setter
+    def stdin(self, stdin: typing.TextIO) -> None:
+        """Summary of stdin.
+
+        Args:
+            stdin (TextIO): Description of stdin.
+        """
+        self._stdin = stdin
+
+    @property
+    def stdout(self) -> typing.TextIO:
+        """Summary of stdout.
+
+        Returns:
+            TextIO: Description of return value
+        """
+        return self._stdout
+
+    @stdout.setter
+    def stdout(self, stdout: typing.TextIO) -> None:
+        """Summary of stdout.
+
+        Args:
+            stdout (TextIO): Description of stdout.
+        """
+        self._stdout = stdout
+
+    def set_args(self, args: list[Any]) -> None:
         """Summary of set_args.
 
         Args:
@@ -22,6 +59,6 @@ class BaseCommand(ABC):
         self.args = args
 
     @abstractmethod
-    def __call__(self) -> Optional[int]:
+    def __call__(self) -> int:
         """All commands should support callable interface."""
         pass

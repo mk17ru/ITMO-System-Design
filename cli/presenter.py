@@ -1,7 +1,7 @@
 """Presenter component module."""
 
-import typing
 import sys
+import typing
 
 
 class Presenter:

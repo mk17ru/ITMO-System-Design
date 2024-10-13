@@ -6,9 +6,9 @@ class Storage:
 
     def __init__(self) -> None:
         """Initialize the storage with an empty dictionary."""
-        self.data: typing.Dict[str, typing.Any] = {}
+        self.data: dict[str, typing.Any] = {}
 
-    def add(self, key: str, val: typing.Any) -> None:
+    def set(self, key: str, val: typing.Any) -> None:
         """Adds a key-value pair to the storage."""
         self.data[key] = val
 
