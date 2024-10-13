@@ -10,8 +10,17 @@ import cli.commands.wc_command as wc_command
 
 
 class Parser:
-    def parse(self, text: str) -> typing.List[base_command.BaseCommand]:
+    """Parser logic."""
 
+    def parse(self, text: str) -> typing.List[base_command.BaseCommand]:
+        """Summary of parse.
+
+        Args:
+            text (str): Description of text.
+
+        Returns:
+            typing.List[base_command.BaseCommand]: Description of return value
+        """
         result: typing.List[base_command.BaseCommand] = []
 
         for line in text.split('\n'):

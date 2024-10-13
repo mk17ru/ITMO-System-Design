@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 import sys
-from typing import Any, TextIO, List
+from typing import Any, Optional, TextIO, List
 
 
 class BaseCommand(ABC):
@@ -13,10 +13,15 @@ class BaseCommand(ABC):
         self.stdout = stdout
         self.args: List[Any] = []
 
-    def set_args(self, args: List[Any]):
+    def set_args(self, args: List[Any]) -> None:
+        """Summary of set_args.
+
+        Args:
+            args (List[Any]): Description of args.
+        """
         self.args = args
 
     @abstractmethod
-    def __call__(self) -> int:
+    def __call__(self) -> Optional[int]:
         """All commands should support callable interface."""
         pass

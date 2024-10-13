@@ -7,6 +7,11 @@ class ExternalCommand(base_command.BaseCommand):
     """ExternalCommand logic."""
 
     def __call__(self) -> int:
+        """Summary of __call__.
+
+        Returns:
+            int: Description of return value
+        """
         command: str = self.args[0]
 
         """Summary of __call__.

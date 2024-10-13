@@ -15,7 +15,6 @@ class CatCommand(base_command.BaseCommand):
         Returns:
             int: Description of return value
         """
-
         path: pathlib.Path = self.args[0]
 
         try:

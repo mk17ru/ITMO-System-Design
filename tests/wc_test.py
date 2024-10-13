@@ -21,8 +21,9 @@ class TestWcCommand:
         mock_open.return_value = mock_file
 
         test_path = Path('test_file.txt')
+        wc_command.set_args([test_path])
 
-        ret_code = wc_command(test_path)
+        ret_code = wc_command()
 
         assert wc_command.stdout.getvalue() == '2 3 17 test_file.txt'
         assert ret_code == 0
@@ -40,8 +41,9 @@ class TestWcCommand:
         mock_open.side_effect = FileNotFoundError
 
         test_path = Path('non_existent_file.txt')
+        wc_command.set_args([test_path])
 
-        ret_code = wc_command(test_path)
+        ret_code = wc_command()
 
         assert ret_code == 1
 
@@ -50,9 +52,9 @@ class TestWcCommand:
         mock_open.side_effect = PermissionError
 
         test_path = Path('restricted_file.txt')
+        wc_command.set_args([test_path])
 
-        ret_code = wc_command(test_path)
-
+        ret_code = wc_command()
         assert ret_code == 1
 
     @patch('builtins.open', create=True)
@@ -60,5 +62,7 @@ class TestWcCommand:
         mock_open.side_effect = Exception('Unexpected error')
 
         test_path = Path('some_file.txt')
-        ret_code = wc_command(test_path)
+        wc_command.set_args([test_path])
+
+        ret_code = wc_command()
         assert ret_code == 1

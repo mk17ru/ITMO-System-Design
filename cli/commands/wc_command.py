@@ -25,7 +25,11 @@ class WcCommand(base_command.BaseCommand):
         return lines, words, bts
 
     def __call__(self) -> int:
+        """Summary of __call__.
 
+        Returns:
+            int: Description of return value
+        """
         path: Optional[Path] = None
         if len(self.args) != 0:
             path = self.args[0]

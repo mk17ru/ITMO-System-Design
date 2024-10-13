@@ -20,8 +20,9 @@ class TestCatCommand:
         mock_open.return_value = mock_file
 
         test_path = Path('test_file.txt')
+        cat_command.set_args([test_path])
 
-        ret_code = cat_command(test_path)
+        ret_code = cat_command()
 
         assert cat_command.stdout.getvalue() == test_content
         assert ret_code == 0
@@ -31,8 +32,9 @@ class TestCatCommand:
         mock_open.side_effect = FileNotFoundError
 
         test_path = Path('non_existent_file.txt')
+        cat_command.set_args([test_path])
 
-        ret_code = cat_command(test_path)
+        ret_code = cat_command()
 
         assert ret_code == 1
 
@@ -41,8 +43,9 @@ class TestCatCommand:
         mock_open.side_effect = PermissionError
 
         test_path = Path('restricted_file.txt')
+        cat_command.set_args([test_path])
 
-        ret_code = cat_command(test_path)
+        ret_code = cat_command()
 
         assert ret_code == 1
 
@@ -52,6 +55,8 @@ class TestCatCommand:
 
         test_path = Path('some_file.txt')
 
-        ret_code = cat_command(test_path)
+        cat_command.set_args([test_path])
+
+        ret_code = cat_command()
 
         assert ret_code == 1

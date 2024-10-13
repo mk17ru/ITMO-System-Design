@@ -19,13 +19,14 @@ def test_parse_command_with_argument():
     assert len(result[0].args) == 1
     assert result[0].args[0] == 'file.txt'
 
+
 def test_parse_command_with_argument_quotes():
     parser = Parser()
-    result = parser.parse('cat \'file.txt\'')
+    result = parser.parse("cat 'file.txt'")
     assert len(result) == 1
     assert isinstance(result[0], cat_command.CatCommand)
     assert len(result[0].args) == 1
-    assert result[0].args[0] == '\'file.txt\''
+    assert result[0].args[0] == "'file.txt'"
 
 
 def test_parse_command_without_arguments():
@@ -38,19 +39,19 @@ def test_parse_command_without_arguments():
 
 def test_parse_command_wrong_arguments():
     parser = Parser()
-    with pytest.raises(Exception, match="Wrong number of arguments!"):
+    with pytest.raises(Exception, match='Wrong number of arguments!'):
         parser.parse('pwd wrong_argument')
 
 
 def test_parse_multiple_commands():
     parser = Parser()
-    commands_text = '''cat file.txt
+    commands_text = """cat file.txt
 echo some text
 wc file.txt
 
 pwd
 exit
-external_command argument'''
+external_command argument"""
     result = parser.parse(commands_text)
     assert len(result) == 6
     assert isinstance(result[0], cat_command.CatCommand)

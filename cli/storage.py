@@ -2,7 +2,9 @@ import typing
 
 
 class Storage:
-    def __init__(self):
+    """Storage logic."""
+
+    def __init__(self) -> None:
         """Initialize the storage with an empty dictionary."""
         self.data: typing.Dict[str, typing.Any] = {}
 
