@@ -4,7 +4,9 @@ import cli.commands.base_command as base_command
 class EchoCommand(base_command.BaseCommand):
     """EchoCommand logic."""
 
-    def __call__(self, user_string: str) -> int:
+    def __call__(self) -> int:
+        user_string: str = self.args[0]
+
         """Summary of __call__.
 
         Args:

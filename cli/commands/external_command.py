@@ -6,7 +6,9 @@ import cli.commands.base_command as base_command
 class ExternalCommand(base_command.BaseCommand):
     """ExternalCommand logic."""
 
-    def __call__(self, command: str) -> int:
+    def __call__(self) -> int:
+        command: str = self.args[0]
+
         """Summary of __call__.
 
         Args:

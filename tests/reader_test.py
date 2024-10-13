@@ -2,7 +2,6 @@ import io
 from cli.reader import Reader
 
 
-
 def test_read_stringio():
     input_stream = io.StringIO("Hello, World!")
     reader = Reader()
@@ -25,4 +24,3 @@ def test_read_file():
     with open("testfile.txt", "r") as f:
         result = reader.read(f)
         assert result == "File content"
-
