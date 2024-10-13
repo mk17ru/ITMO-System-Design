@@ -70,7 +70,7 @@ preview = true
 quote-style = "single"
 
 [tool.ruff.lint]
-ignore = ["D107"]
+ignore = ["D100", "D107"]
 # enable docstring
 select = ["D"]
 
