@@ -12,7 +12,7 @@ class ExternalCommand(base_command.BaseCommand):
         Returns:
             int: Description of return value
         """
-        command: str = self.args[0]
+        command = self.args[0]
 
         """Summary of __call__.
 
@@ -22,4 +22,6 @@ class ExternalCommand(base_command.BaseCommand):
         Returns:
             int: Description of return value
         """
-        return subprocess.run(command.split(), stdin=self.stdin, stdout=self.stdout).returncode
+        if isinstance(command, str):
+            return subprocess.run(command.split(), stdin=self.stdin, stdout=self.stdout).returncode
+        raise TypeError

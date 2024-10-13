@@ -20,4 +20,5 @@ class EchoCommand(base_command.BaseCommand):
         Returns:
             int: Description of return value
         """
-        return self.stdout.write(user_string)
+        self.stdout.write(user_string)
+        return 0

@@ -8,6 +8,7 @@
 import os
 import sys
 
+
 # it's required to support imports in Sphinx generated .rst files
 sys.path.append(os.path.abspath('../../'))
 cli_path = os.path.abspath('../../cli')

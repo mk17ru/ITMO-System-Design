@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import patch
+
 from cli.commands.exit_command import ExitCommand
 
 
@@ -12,5 +12,5 @@ class TestExitCommand:
         with pytest.raises(SystemExit) as exc_info:
             exit_command()
 
-        assert exc_info.type == SystemExit
+        assert exc_info.type is SystemExit
         assert exc_info.value.code == 0

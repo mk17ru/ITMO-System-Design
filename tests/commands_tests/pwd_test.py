@@ -1,6 +1,8 @@
-import pytest
-from unittest.mock import patch
 from io import StringIO
+from unittest.mock import patch
+
+import pytest
+
 from cli.commands.pwd_command import PwdCommand
 
 

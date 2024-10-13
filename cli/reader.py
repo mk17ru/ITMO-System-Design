@@ -1,11 +1,12 @@
-import string
-import typing
 import sys
+import typing
 
 
 class Reader:
     """Reader logic."""
 
-    def read(self, input_stream: typing.TextIO = sys.stdin) -> str:
+    @staticmethod
+    def read(input_stream: typing.TextIO = sys.stdin) -> str:
         """Reads strings from the input stream."""
-        return input_stream.read()
+        line = input_stream.readline()
+        return line

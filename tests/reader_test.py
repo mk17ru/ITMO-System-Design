@@ -1,4 +1,7 @@
 import io
+import os
+import uuid
+
 from cli.reader import Reader
 
 
@@ -18,9 +21,15 @@ def test_read_empty_stream():
 
 def test_read_file():
     reader = Reader()
-    with open('testfile.txt', 'w') as f:
-        f.write('File content')
 
-    with open('testfile.txt', 'r') as f:
-        result = reader.read(f)
-        assert result == 'File content'
+    isolate_postfix = uuid.uuid4().hex[:6]
+    test_file_path = f'testfile_{isolate_postfix}.txt'
+
+    with open(test_file_path, 'w') as f:
+        f.write('File content')
+    try:
+        with open(test_file_path) as f:
+            result = reader.read(f)
+            assert result == 'File content'
+    finally:
+        os.remove(test_file_path)

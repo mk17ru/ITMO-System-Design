@@ -1,5 +1,3 @@
-import typing
-
 import cli.commands.base_command as base_command
 import cli.commands.cat_command as cat_command
 import cli.commands.echo_command as echo_command
@@ -12,7 +10,8 @@ import cli.commands.wc_command as wc_command
 class Parser:
     """Parser logic."""
 
-    def parse(self, text: str) -> typing.List[base_command.BaseCommand]:
+    @staticmethod
+    def parse(text: str) -> list[base_command.BaseCommand]:
         """Summary of parse.
 
         Args:
@@ -21,7 +20,7 @@ class Parser:
         Returns:
             typing.List[base_command.BaseCommand]: Description of return value
         """
-        result: typing.List[base_command.BaseCommand] = []
+        result: list[base_command.BaseCommand] = []
 
         for line in text.split('\n'):
             line.strip()
