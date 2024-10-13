@@ -25,24 +25,24 @@ class Parser:
 
         for line in text.split('\n'):
             line.strip()
-            line = line.split()
-            if len(line) == 0:
+            line_splitted = line.split()
+            if len(line_splitted) == 0:
                 continue
-            cmd_str = line[0]
-            args = line[1:]
+            cmd_str = line_splitted[0]
+            args = line_splitted[1:]
             args = [arg for arg in args if arg != '']
             if cmd_str == 'cat':
                 if len(args) != 1:
                     raise Exception('Wrong number of arguments!')
-                cmd = cat_command.CatCommand()
-                cmd.set_args(args)
-                result.append(cmd)
+                cat_cmd = cat_command.CatCommand()
+                cat_cmd.set_args(args)
+                result.append(cat_cmd)
             elif cmd_str == 'echo':
                 if len(args) == 0:
                     raise Exception('Wrong number of arguments!')
-                cmd = echo_command.EchoCommand()
-                cmd.set_args([''.join(args)])
-                result.append(cmd)
+                echo_cmd = echo_command.EchoCommand()
+                echo_cmd.set_args([''.join(args)])
+                result.append(echo_cmd)
             elif cmd_str == 'exit':
                 if len(args) != 0:
                     raise Exception('Wrong number of arguments!')
