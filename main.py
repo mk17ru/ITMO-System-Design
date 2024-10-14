@@ -10,7 +10,6 @@ def main_logic() -> int:
             parsed_commands: list[base_command.BaseCommand] = parser.Parser.parse(raw_input_command)
             executor.Executor.execute(parsed_commands)
             presenter_ = presenter.Presenter()
-            print(executor.Executor.output_data)
             presenter_.show(executor.Executor.output_data)
         except KeyboardInterrupt:
             return 0
