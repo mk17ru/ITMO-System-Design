@@ -9,8 +9,6 @@ class TestExitCommand:
         return ExitCommand()
 
     def test_echo_command_exit(self, exit_command):
-        with pytest.raises(SystemExit) as exc_info:
-            exit_command()
+        status_code = exit_command()
 
-        assert exc_info.type is SystemExit
-        assert exc_info.value.code == 0
+        assert status_code == 0
