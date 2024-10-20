@@ -86,3 +86,14 @@ def test_parse_wrong_command():
         result = parser_.parse(input_cmd)
 
         assert len(result) == 0
+
+def test_parse_from_storage():
+    parser_ = parser.Parser()
+
+    parser_.parse("alias=pwd")
+
+    result = parser_.parse('$alias')
+
+    assert len(result) == 1
+    assert isinstance(result[0], pwd_command.PwdCommand)
+    assert len(result[0].args) == 0

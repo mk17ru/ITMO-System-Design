@@ -8,6 +8,10 @@ import cli.commands.external_command as external_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
 
+from cli.storage import Storage
+
+import re
+
 
 class InvalidCommandError(ValueError):
     """Raise if input cmd is not Linux command."""
@@ -17,6 +21,9 @@ class InvalidCommandError(ValueError):
 
 class Parser:
     """Parser logic."""
+
+    def __init__(self) -> None:
+        self.storage = Storage()
 
     PIPE_SYMBOL = '|'
 
@@ -53,8 +60,7 @@ class Parser:
             raise InvalidCommandError(f'Command {input_cmd} is not valid Linux command!')
         return None
 
-    @staticmethod
-    def parse(cli_input: str) -> list[base_command.BaseCommand]:
+    def parse(self, cli_input: str) -> list[base_command.BaseCommand]:
         """Summary of parse.
 
         Args:
@@ -69,7 +75,23 @@ class Parser:
             cmd_line_splitted = cmd_line.split()
             if len(cmd_line_splitted) == 0:
                 continue
-            input_cmd = cmd_line_splitted[0]
+            filtered_tokens = []
+            for token in cmd_line_splitted:
+                if re.match(r"^[A-Za-z_]\w*=\S+$", token):
+                    key, value = token.split("=", 1)
+                    self.storage.set(key, value)
+                    continue
+                if re.match(r"^\$[A-Za-z_]\w*$", token):
+                    key = token[1:]
+                    val = self.storage.get(key)
+                    filtered_tokens.append(val)
+
+                filtered_tokens.append(token)
+
+            if len(filtered_tokens) == 0:
+                continue
+
+            input_cmd = filtered_tokens[0]
             Parser._validate_input_cmd(input_cmd)
             args = cmd_line_splitted[1:]
             args = [arg for arg in args if arg != '']
