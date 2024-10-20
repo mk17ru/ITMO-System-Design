@@ -10,7 +10,7 @@ from typing import Any
 class Commands(enum.StrEnum):
     """List of commands that are used to build CLI (kinda CLI building blocks).
 
-    But CLI supports almost all Linux commands
+    But CLI supports all Linux commands, which can be determined by 'which' Linux command
     """
 
     CAT = 'cat'
