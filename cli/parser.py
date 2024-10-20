@@ -1,3 +1,4 @@
+import re
 import subprocess
 
 import cli.commands.base_command as base_command
@@ -7,10 +8,7 @@ import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
-
 from cli.storage import Storage
-
-import re
 
 
 class InvalidCommandError(ValueError):
@@ -77,11 +75,11 @@ class Parser:
                 continue
             filtered_tokens = []
             for token in cmd_line_splitted:
-                if re.match(r"^[A-Za-z_]\w*=\S+$", token):
-                    key, value = token.split("=", 1)
+                if re.match(r'^[A-Za-z_]\w*=\S+$', token):
+                    key, value = token.split('=', 1)
                     self.storage.set(key, value)
                     continue
-                if re.match(r"^\$[A-Za-z_]\w*$", token):
+                if re.match(r'^\$[A-Za-z_]\w*$', token):
                     key = token[1:]
                     val = self.storage.get(key)
                     filtered_tokens.append(val)

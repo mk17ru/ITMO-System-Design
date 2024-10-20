@@ -87,10 +87,11 @@ def test_parse_wrong_command():
 
         assert len(result) == 0
 
+
 def test_parse_from_storage():
     parser_ = parser.Parser()
 
-    parser_.parse("alias=pwd")
+    parser_.parse('alias=pwd')
 
     result = parser_.parse('$alias')
 
