@@ -14,10 +14,10 @@ class Presenter:
         """Summary of show.
 
         Args:
-            data (str): Description of data.
+            data (str): Data to present.
 
         Returns:
-            None: Description of return value
+            None: Function doesn't return anything
         """
         self.output_stream.write(data + '\n')
         self.output_stream.flush()

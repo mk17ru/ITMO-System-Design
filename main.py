@@ -11,6 +11,8 @@ def main_logic() -> int:
             executor.Executor.execute(parsed_commands)
             presenter_ = presenter.Presenter()
             presenter_.show(executor.Executor.output_data)
+        except parser.InvalidCommandError as exc:
+            print(exc)
         except KeyboardInterrupt:
             return 0
 

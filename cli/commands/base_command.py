@@ -1,9 +1,21 @@
 """Module with Base Command class."""
 
+import enum
 import sys
 import typing
 from abc import ABC, abstractmethod
 from typing import Any
+
+
+class Commands(enum.StrEnum):
+    """Commands logic."""
+
+    CAT = 'cat'
+    ECHO = 'echo'
+    EXIT = 'exit'
+    PWD = 'pwd'
+    WC = 'wc'
+    WHICH = 'which'
 
 
 class BaseCommand(ABC):
