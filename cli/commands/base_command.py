@@ -8,7 +8,10 @@ from typing import Any
 
 
 class Commands(enum.StrEnum):
-    """Commands logic."""
+    """List of commands that are used to build CLI (kinda CLI building blocks).
+
+    But CLI supports almost all Linux commands
+    """
 
     CAT = 'cat'
     ECHO = 'echo'
