@@ -122,6 +122,7 @@ class Parser:
                     result.append(wc_cmd)
                 case _:
                     external_cmd = external_command.ExternalCommand()
-                    external_cmd.set_args(args)  # doesn't work yet, check parser and external cmd
+                    args.insert(0, input_cmd)
+                    external_cmd.set_args(args)
                     result.append(external_cmd)
         return result

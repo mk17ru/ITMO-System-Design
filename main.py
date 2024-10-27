@@ -20,3 +20,5 @@ def main_logic() -> int:
 
 if __name__ == '__main__':
     main_logic()
+    # import subprocess
+    # print (subprocess.run(, stdin=self.stdin, stdout=self.stdout).returncode)

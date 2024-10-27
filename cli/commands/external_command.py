@@ -13,6 +13,4 @@ class ExternalCommand(base_command.BaseCommand):
             int: Cmd return code
         """
         command = self.args
-        if isinstance(command, str):
-            return subprocess.run(command.split(), stdin=self.stdin, stdout=self.stdout).returncode
-        raise TypeError
+        return subprocess.run(command, stdin=self.stdin, stdout=self.stdout).returncode

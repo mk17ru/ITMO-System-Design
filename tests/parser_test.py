@@ -73,7 +73,7 @@ def test_parse_external_command():
 
     assert len(result) == 1
     assert isinstance(result[0], external_command.ExternalCommand)
-    assert len(result[0].args) == 0
+    assert len(result[0].args) == 1
 
 
 def test_parse_wrong_command():
