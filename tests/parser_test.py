@@ -98,3 +98,27 @@ def test_parse_from_storage():
     assert len(result) == 1
     assert isinstance(result[0], pwd_command.PwdCommand)
     assert len(result[0].args) == 0
+
+
+def test_parse_set_and_echo():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse('echo $x')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1'
+
+
+def test_parse_from_set_command():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse('x=echo | $x 1')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1'

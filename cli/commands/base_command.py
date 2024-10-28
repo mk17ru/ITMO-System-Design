@@ -1,6 +1,7 @@
 """Module with Base Command class."""
 
 import enum
+import io
 import sys
 import typing
 from abc import ABC, abstractmethod
@@ -24,7 +25,7 @@ class Commands(enum.StrEnum):
 class BaseCommand(ABC):
     """Base class for all commands."""
 
-    def __init__(self, stdin: typing.TextIO = sys.stdin, stdout: typing.TextIO = sys.stdout):
+    def __init__(self, stdin: typing.TextIO = sys.stdin, stdout: typing.TextIO = io.StringIO()):  # noqa: B008
         self.stdin = stdin
         self.stdout = stdout
         self.args: list[Any] = []

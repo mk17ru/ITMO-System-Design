@@ -1,3 +1,5 @@
+import io
+
 from cli.commands import base_command
 
 
@@ -8,7 +10,7 @@ ERROR_STATUS_CODE = 1
 class Executor:
     """Executor logic."""
 
-    output_data: str = ''
+    output_data = io.StringIO()
 
     @staticmethod
     def execute(parsed_commands: list[base_command.BaseCommand]) -> int:
@@ -20,14 +22,22 @@ class Executor:
         Returns:
             int: Status code
         """
+        Executor.output_data = io.StringIO()
         status_code: int = OK_STATUS_CODE
         error_message = None
         try:
-            for _, command in enumerate(parsed_commands):
+            for i, command in enumerate(parsed_commands):
+                if i + 1 == len(parsed_commands):
+                    command.stdout = Executor.output_data
                 status_code = command()
-                # output_io = io.StringIO()
-                # with contextlib.redirect_stdout(output_io): doesn't work correctly
-                #     Executor.output_data = output_io.getvalue()
+                if status_code == OK_STATUS_CODE:
+                    if i + 1 != len(parsed_commands):
+                        command.stdout.seek(0)
+                        parsed_commands[i + 1].stdin = command.stdout
+                else:
+                    error_message = f'Error on command: {command.__class__.__name__}'
+                    return status_code
+
         except FileNotFoundError:
             error_message = 'Error: The file was not found.'
         except PermissionError:

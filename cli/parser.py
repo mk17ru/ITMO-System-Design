@@ -79,19 +79,18 @@ class Parser:
                     key, value = token.split('=', 1)
                     self.storage.set(key, value)
                     continue
-                if re.match(r'^\$[A-Za-z_]\w*$', token):
+                elif re.match(r'^\$[A-Za-z_]\w*$', token):
                     key = token[1:]
                     val = self.storage.get(key)
                     filtered_tokens.append(val)
-
-                filtered_tokens.append(token)
-
+                else:
+                    filtered_tokens.append(token)
             if len(filtered_tokens) == 0:
                 continue
 
             input_cmd = filtered_tokens[0]
             Parser._validate_input_cmd(input_cmd)
-            args = cmd_line_splitted[1:]
+            args = filtered_tokens[1:]
             args = [arg for arg in args if arg != '']
             match input_cmd:
                 case base_command.Commands.CAT:
