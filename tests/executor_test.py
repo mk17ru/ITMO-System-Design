@@ -211,7 +211,7 @@ def test_executor_pipes_cat_command(mock_open, _cat_command):
 
 
 @unittest.mock.patch('builtins.open', create=True)
-def test_executor_cat_command(mock_open):
+def test_executor_grep_command(mock_open):
     test_content = 'Hello, this is a test is file. is\nnone\nis'
     mock_file = unittest.mock.MagicMock()
     mock_file.__enter__.return_value = test_content.splitlines(True)
@@ -224,4 +224,3 @@ def test_executor_cat_command(mock_open):
 
     assert ret_code == 0
     assert executor.Executor.output_data.getvalue() == 'Hello, this is a test is file. is\nis'
-

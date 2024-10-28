@@ -4,9 +4,9 @@ import cli.commands.cat_command as cat_command
 import cli.commands.echo_command as echo_command
 import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
+import cli.commands.grep_command as grep_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
-import cli.commands.grep_command as grep_command
 from cli import parser
 
 
@@ -136,4 +136,3 @@ def test_parse_grep_command():
     assert isinstance(result[0], grep_command.GrepCommand)
     assert result[0].args[0] == '"Минимальный"'
     assert result[0].args[1] == 'README.md'
-
