@@ -8,6 +8,8 @@ import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
+import cli.commands.grep_command as grep_command
+
 from cli.storage import Storage
 
 
@@ -119,6 +121,12 @@ class Parser:
                     wc_cmd = wc_command.WcCommand()
                     wc_cmd.set_args(args)
                     result.append(wc_cmd)
+                case base_command.Commands.GREP:
+                    if len(args) < 2:
+                        raise Exception('Wrong number of arguments!')
+                    grep_cmd = grep_command.GrepCommand()
+                    grep_cmd.set_args(args)
+                    result.append(grep_cmd)
                 case _:
                     external_cmd = external_command.ExternalCommand()
                     args.insert(0, input_cmd)
