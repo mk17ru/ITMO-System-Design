@@ -43,7 +43,7 @@ class GrepCommand(BaseCommand):
         self.parse_args()
 
         flags = re.IGNORECASE if self.ignore_case else 0
-        pattern = r'\b' + self.pattern + r'\b' if self.match_whole_word else self.pattern
+        pattern = rf'\b{self.pattern}\b' if self.match_whole_word else self.pattern
         regex = re.compile(pattern, flags)
 
         try:
