@@ -36,7 +36,7 @@ def test_executor_cat_command(mock_open, _cat_command):
     ret_code = executor_.execute([_cat_command])
 
     assert ret_code == 0
-    assert _cat_command.stdout.getvalue() == test_content
+    assert executor.Executor.output_data.getvalue() == test_content
 
 
 @unittest.mock.patch('builtins.open', create=True)
@@ -84,7 +84,7 @@ def test_executor_echo_command():
     ret_code = executor_.execute([command])
 
     assert ret_code == 0
-    assert stdout.getvalue() == 'Hello'
+    assert executor.Executor.output_data.getvalue() == 'Hello'
 
 
 def test_executor_pwd_command():
@@ -95,7 +95,7 @@ def test_executor_pwd_command():
     ret_code = executor_.execute([command])
 
     assert ret_code == 0
-    assert stdout.getvalue().strip() == os.getcwd()
+    assert executor.Executor.output_data.getvalue().strip() == os.getcwd()
 
 
 @unittest.mock.patch('builtins.open', create=True)
@@ -112,7 +112,7 @@ def test_executor_wc_command_with_file(mock_open, _wc_command):
     ret_code = executor_.execute([_wc_command])
 
     assert ret_code == 0
-    assert _wc_command.stdout.getvalue() == '2 3 17 test_file.txt'
+    assert executor.Executor.output_data.getvalue() == '2 3 17 test_file.txt'
 
 
 def test_executor_wc_command_without_file():
@@ -124,7 +124,7 @@ def test_executor_wc_command_without_file():
     ret_code = executor_.execute([command])
 
     assert ret_code == 0
-    assert stdout.getvalue() == '3 6 20 '
+    assert executor.Executor.output_data.getvalue() == '3 6 20 '
 
 
 @unittest.mock.patch('builtins.open', create=True)
@@ -161,3 +161,35 @@ def test_executor_wc_command_unexpected_error(mock_open, _wc_command):
     ret_code = executor_.execute([_wc_command])
 
     assert ret_code == 1
+
+
+def test_executor_pipes_command():
+    commandEcho = echo_command.EchoCommand()
+    commandEcho.set_args(['Line 1\nLine 2\nLine 3'])
+
+    commandWc = wc_command.WcCommand()
+
+    executor_ = executor.Executor()
+    ret_code = executor_.execute([commandEcho, commandWc])
+
+    assert ret_code == 0
+    assert executor.Executor.output_data.getvalue() == '3 6 20 '
+
+
+@unittest.mock.patch('builtins.open', create=True)
+def test_executor_pipes_cat_command(mock_open, _cat_command):
+    test_content = 'Hello, this is a test file.'
+    mock_file = unittest.mock.MagicMock()
+    mock_file.__enter__.return_value = test_content.splitlines(True)
+    mock_open.return_value = mock_file
+    test_path = pathlib.Path('test_file.txt')
+    _cat_command.set_args([test_path])
+
+    commandEcho = echo_command.EchoCommand()
+    commandEcho.set_args(['test_file.txt'])
+
+    executor_ = executor.Executor()
+    ret_code = executor_.execute([commandEcho, _cat_command])
+
+    assert ret_code == 0
+    assert executor.Executor.output_data.getvalue() == test_content

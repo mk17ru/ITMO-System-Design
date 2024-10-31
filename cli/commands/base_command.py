@@ -1,15 +1,31 @@
 """Module with Base Command class."""
 
+import enum
+import io
 import sys
 import typing
 from abc import ABC, abstractmethod
 from typing import Any
 
 
+class Commands(enum.StrEnum):
+    """List of commands that are used to build CLI (kinda CLI building blocks).
+
+    But CLI supports all Linux commands, which can be determined by 'which' Linux command
+    """
+
+    CAT = 'cat'
+    ECHO = 'echo'
+    EXIT = 'exit'
+    PWD = 'pwd'
+    WC = 'wc'
+    WHICH = 'which'
+
+
 class BaseCommand(ABC):
     """Base class for all commands."""
 
-    def __init__(self, stdin: typing.TextIO = sys.stdin, stdout: typing.TextIO = sys.stdout):
+    def __init__(self, stdin: typing.TextIO = sys.stdin, stdout: typing.TextIO = io.StringIO()):  # noqa: B008
         self.stdin = stdin
         self.stdout = stdout
         self.args: list[Any] = []

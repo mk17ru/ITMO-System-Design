@@ -10,18 +10,7 @@ class ExternalCommand(base_command.BaseCommand):
         """Summary of __call__.
 
         Returns:
-            int: Description of return value
+            int: Cmd return code
         """
-        command = self.args[0]
-
-        """Summary of __call__.
-
-        Args:
-            command (str): Description of command.
-
-        Returns:
-            int: Description of return value
-        """
-        if isinstance(command, str):
-            return subprocess.run(command.split(), stdin=self.stdin, stdout=self.stdout).returncode
-        raise TypeError
+        command = self.args
+        return subprocess.run(command, stdin=self.stdin, stdout=self.stdout).returncode

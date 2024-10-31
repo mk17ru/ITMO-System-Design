@@ -6,12 +6,13 @@ import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
-from cli.parser import Parser
+from cli import parser
 
 
 def test_parse_command_with_argument():
-    parser = Parser()
-    result = parser.parse('cat file.txt')
+    parser_ = parser.Parser()
+    result = parser_.parse('cat file.txt')
+
     assert len(result) == 1
     assert isinstance(result[0], cat_command.CatCommand)
     assert len(result[0].args) == 1
@@ -19,8 +20,9 @@ def test_parse_command_with_argument():
 
 
 def test_parse_command_with_argument_quotes():
-    parser = Parser()
-    result = parser.parse("cat 'file.txt'")
+    parser_ = parser.Parser()
+    result = parser_.parse("cat 'file.txt'")
+
     assert len(result) == 1
     assert isinstance(result[0], cat_command.CatCommand)
     assert len(result[0].args) == 1
@@ -28,33 +30,95 @@ def test_parse_command_with_argument_quotes():
 
 
 def test_parse_command_without_arguments():
-    parser = Parser()
-    result = parser.parse('pwd')
+    parser_ = parser.Parser()
+    result = parser_.parse('pwd')
+
     assert len(result) == 1
     assert isinstance(result[0], pwd_command.PwdCommand)
     assert len(result[0].args) == 0
 
 
 def test_parse_command_wrong_arguments():
-    parser = Parser()
+    parser_ = parser.Parser()
     with pytest.raises(Exception, match='Wrong number of arguments!'):
-        parser.parse('pwd wrong_argument')
+        result = parser_.parse('pwd wrong_argument')
+
+        assert len(result) == 0
 
 
 def test_parse_multiple_commands():
-    parser = Parser()
-    commands_text = """cat file.txt
-echo some text
-wc file.txt
-
-pwd
-exit
-external_command argument"""
-    result = parser.parse(commands_text)
+    parser_ = parser.Parser()
+    commands_text = """ 
+                    cat file.txt | 
+                    echo some text | 
+                    wc file.txt | 
+                    pwd | 
+                    grep argument |
+                    exit
+                    """
+    result = parser_.parse(commands_text)
     assert len(result) == 6
+
     assert isinstance(result[0], cat_command.CatCommand)
     assert isinstance(result[1], echo_command.EchoCommand)
     assert isinstance(result[2], wc_command.WcCommand)
     assert isinstance(result[3], pwd_command.PwdCommand)
-    assert isinstance(result[4], exit_command.ExitCommand)
-    assert isinstance(result[5], external_command.ExternalCommand)
+    assert isinstance(result[4], external_command.ExternalCommand)
+    assert isinstance(result[5], exit_command.ExitCommand)
+
+
+def test_parse_external_command():
+    parser_ = parser.Parser()
+    result = parser_.parse('lsof')
+
+    assert len(result) == 1
+    assert isinstance(result[0], external_command.ExternalCommand)
+    assert len(result[0].args) == 1
+
+
+def test_parse_wrong_command():
+    parser_ = parser.Parser()
+    input_cmd = 'my_beautiful_cmd arg1'
+    with pytest.raises(
+        parser.InvalidCommandError,
+        match=f'Command {input_cmd.split()[0]} is not valid Linux command!',
+    ):
+        result = parser_.parse(input_cmd)
+
+        assert len(result) == 0
+
+
+def test_parse_from_storage():
+    parser_ = parser.Parser()
+
+    parser_.parse('alias=pwd')
+
+    result = parser_.parse('$alias')
+
+    assert len(result) == 1
+    assert isinstance(result[0], pwd_command.PwdCommand)
+    assert len(result[0].args) == 0
+
+
+def test_parse_set_and_echo():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse('echo $x')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1'
+
+
+def test_parse_from_set_command():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse('x=echo | $x 1')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1'

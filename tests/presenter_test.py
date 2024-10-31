@@ -1,3 +1,4 @@
+import io
 import sys
 from io import StringIO
 
@@ -13,7 +14,7 @@ def test_show_message_to_stdout():
 
     # Выводим данные
     data = 'Hello, World!'
-    presenter.show(data)
+    presenter.show(io.StringIO(data))
 
     assert output.getvalue() == 'Hello, World!\n'
 
@@ -23,7 +24,8 @@ def test_show_message_to_custom_stream():
     presenter = Presenter(output_stream=output)
 
     data = 'Test data'
-    presenter.show(data)
+
+    presenter.show(io.StringIO(data))
 
     assert output.getvalue() == 'Test data\n'
 
@@ -35,7 +37,7 @@ def test_show_message_with_default_stdout():
     presenter = Presenter(sys.stdout)
 
     data = 'Default stdout data'
-    presenter.show(data)
+    presenter.show(io.StringIO(data))
 
     sys.stdout = sys.__stdout__
 
