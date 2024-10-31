@@ -1,3 +1,4 @@
+import io
 import subprocess
 
 import cli.commands.base_command as base_command
@@ -13,4 +14,8 @@ class ExternalCommand(base_command.BaseCommand):
             int: Cmd return code
         """
         command = self.args
-        return subprocess.run(command, stdin=self.stdin, stdout=self.stdout).returncode
+
+        result = subprocess.run(command, stdin=self.stdin, capture_output=True)
+        self.stdout.write(result.stdout.decode())
+        self.stdout.flush()
+        return result.returncode

@@ -32,4 +32,7 @@ poetry run pytest -vv --showlocals
 2) Создание новой версии ```Markdown```: ```cd docs && make markdown```
 
 ## Запуск 
-```python3 main.py```
+```
+poerty install
+python3 main.py
+```
