@@ -139,6 +139,7 @@ def test_executor_wc_command_file_not_found(mock_open, _wc_command):
 
     assert ret_code == 1
 
+
 def test_executor_external_command():
     with open('output.txt', 'w+') as stdout_file, open('input.txt', 'w+') as input_file:
         cmd = ExternalCommand(stdin=input_file, stdout=stdout_file)
@@ -153,7 +154,6 @@ def test_executor_external_command():
         assert executor.Executor.output_data.getvalue() == expected_out
     os.remove('input.txt')
     os.remove('output.txt')
-
 
 
 @unittest.mock.patch('builtins.open', create=True)
@@ -210,4 +210,3 @@ def test_executor_pipes_cat_command(mock_open, _cat_command):
 
     assert ret_code == 0
     assert executor.Executor.output_data.getvalue() == test_content
-

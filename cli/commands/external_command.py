@@ -1,4 +1,3 @@
-import io
 import subprocess
 
 import cli.commands.base_command as base_command
