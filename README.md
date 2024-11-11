@@ -36,3 +36,9 @@ poetry run pytest -vv --showlocals
 poerty install
 python3 main.py
 ```
+
+___
+
+# Обратная связь команды №3
+
+TODO
