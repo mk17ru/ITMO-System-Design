@@ -21,6 +21,7 @@ class Commands(enum.StrEnum):
     WC = 'wc'
     WHICH = 'which'
     GREP = 'grep'
+    CD = 'cd'
 
 
 class BaseCommand(ABC):
