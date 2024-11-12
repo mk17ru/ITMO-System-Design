@@ -20,6 +20,7 @@ class Commands(enum.StrEnum):
     PWD = 'pwd'
     WC = 'wc'
     WHICH = 'which'
+    CD = 'cd'
 
 
 class BaseCommand(ABC):

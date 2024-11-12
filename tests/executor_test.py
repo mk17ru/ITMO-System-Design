@@ -181,13 +181,13 @@ def test_executor_wc_command_unexpected_error(mock_open, _wc_command):
 
 
 def test_executor_pipes_command():
-    commandEcho = echo_command.EchoCommand()
-    commandEcho.set_args(['Line 1\nLine 2\nLine 3'])
+    command_echo = echo_command.EchoCommand()
+    command_echo.set_args(['Line 1\nLine 2\nLine 3'])
 
-    commandWc = wc_command.WcCommand()
+    command_wc = wc_command.WcCommand()
 
     executor_ = executor.Executor()
-    ret_code = executor_.execute([commandEcho, commandWc])
+    ret_code = executor_.execute([command_echo, command_wc])
 
     assert ret_code == 0
     assert executor.Executor.output_data.getvalue() == '3 6 20 '
