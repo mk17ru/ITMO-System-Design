@@ -8,6 +8,7 @@ import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
+import cli.commands.ls_command as ls_command
 from cli.storage import Storage
 
 
@@ -119,6 +120,10 @@ class Parser:
                     wc_cmd = wc_command.WcCommand()
                     wc_cmd.set_args(args)
                     result.append(wc_cmd)
+                case base_command.Commands.LS:
+                    ls_cmd = ls_command.LsCommand()
+                    ls_cmd.set_args(args)
+                    result.append(ls_cmd)
                 case _:
                     external_cmd = external_command.ExternalCommand()
                     args.insert(0, input_cmd)
