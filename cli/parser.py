@@ -9,6 +9,7 @@ import cli.commands.external_command as external_command
 import cli.commands.grep_command as grep_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
+import cli.commands.ls_command as ls_command
 from cli.storage import Storage
 
 
@@ -126,6 +127,10 @@ class Parser:
                     grep_cmd = grep_command.GrepCommand()
                     grep_cmd.set_args(args)
                     result.append(grep_cmd)
+                case base_command.Commands.LS:
+                    ls_cmd = ls_command.LsCommand()
+                    ls_cmd.set_args(args)
+                    result.append(ls_cmd)
                 case _:
                     external_cmd = external_command.ExternalCommand()
                     args.insert(0, input_cmd)
