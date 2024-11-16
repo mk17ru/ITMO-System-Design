@@ -6,9 +6,9 @@ import cli.commands.cat_command as cat_command
 import cli.commands.echo_command as echo_command
 import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
+import cli.commands.ls_command as ls_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
-import cli.commands.ls_command as ls_command
 from cli.storage import Storage
 
 
