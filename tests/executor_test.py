@@ -6,7 +6,8 @@ import unittest.mock
 import pytest
 
 from cli import executor
-from cli.commands import cat_command, echo_command, pwd_command, wc_command, grep_command, external_command
+from cli.commands import cat_command, echo_command, external_command, grep_command, pwd_command, wc_command
+
 
 @pytest.fixture
 def _cat_command():
