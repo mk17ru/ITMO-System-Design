@@ -8,6 +8,7 @@ import cli.commands.grep_command as grep_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
 from cli import parser
+from cli.commands import ls_command
 
 
 def test_parse_command_with_argument():
@@ -66,7 +67,7 @@ def test_parse_multiple_commands():
     assert isinstance(result[2], wc_command.WcCommand)
     assert isinstance(result[3], pwd_command.PwdCommand)
     assert isinstance(result[4], grep_command.GrepCommand)
-    assert isinstance(result[5], external_command.ExternalCommand)
+    assert isinstance(result[5], ls_command.LsCommand)
     assert isinstance(result[6], exit_command.ExitCommand)
 
 
