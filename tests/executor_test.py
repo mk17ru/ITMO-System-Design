@@ -6,8 +6,7 @@ import unittest.mock
 import pytest
 
 from cli import executor
-from cli.commands import cat_command, echo_command, pwd_command, wc_command
-from cli.commands.external_command import ExternalCommand
+from cli.commands import cat_command, echo_command, external_command, grep_command, pwd_command, wc_command
 
 
 @pytest.fixture
@@ -142,7 +141,7 @@ def test_executor_wc_command_file_not_found(mock_open, _wc_command):
 
 def test_executor_external_command():
     with open('output.txt', 'w+') as stdout_file, open('input.txt', 'w+') as input_file:
-        cmd = ExternalCommand(stdin=input_file, stdout=stdout_file)
+        cmd = external_command.ExternalCommand(stdin=input_file, stdout=stdout_file)
         input_cmd = 'head -n 1 tests/executor_test.py'.split()
         cmd.set_args(input_cmd)
         executor_ = executor.Executor()
@@ -210,3 +209,19 @@ def test_executor_pipes_cat_command(mock_open, _cat_command):
 
     assert ret_code == 0
     assert executor.Executor.output_data.getvalue() == test_content
+
+
+@unittest.mock.patch('builtins.open', create=True)
+def test_executor_grep_command(mock_open):
+    test_content = 'Hello, this is a test is file. is\nnone\nis'
+    mock_file = unittest.mock.MagicMock()
+    mock_file.__enter__.return_value = test_content.splitlines(True)
+    mock_open.return_value = mock_file
+    test_path = pathlib.Path('test_file.txt')
+    commandGrep = grep_command.GrepCommand()
+    commandGrep.set_args(['is', test_path.absolute().as_posix()])
+    executor_ = executor.Executor()
+    ret_code = executor_.execute([commandGrep])
+
+    assert ret_code == 0
+    assert executor.Executor.output_data.getvalue() == 'Hello, this is a test is file. is\nis'

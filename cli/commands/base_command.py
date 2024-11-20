@@ -20,6 +20,7 @@ class Commands(enum.StrEnum):
     PWD = 'pwd'
     WC = 'wc'
     WHICH = 'which'
+    GREP = 'grep'
 
 
 class BaseCommand(ABC):

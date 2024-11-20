@@ -4,6 +4,7 @@ import cli.commands.cat_command as cat_command
 import cli.commands.echo_command as echo_command
 import cli.commands.exit_command as exit_command
 import cli.commands.external_command as external_command
+import cli.commands.grep_command as grep_command
 import cli.commands.pwd_command as pwd_command
 import cli.commands.wc_command as wc_command
 from cli import parser
@@ -53,18 +54,20 @@ def test_parse_multiple_commands():
                     echo some text | 
                     wc file.txt | 
                     pwd | 
-                    grep argument |
+                    grep f file.txt |
+                    ls argument |
                     exit
                     """
     result = parser_.parse(commands_text)
-    assert len(result) == 6
+    assert len(result) == 7
 
     assert isinstance(result[0], cat_command.CatCommand)
     assert isinstance(result[1], echo_command.EchoCommand)
     assert isinstance(result[2], wc_command.WcCommand)
     assert isinstance(result[3], pwd_command.PwdCommand)
-    assert isinstance(result[4], external_command.ExternalCommand)
-    assert isinstance(result[5], exit_command.ExitCommand)
+    assert isinstance(result[4], grep_command.GrepCommand)
+    assert isinstance(result[5], external_command.ExternalCommand)
+    assert isinstance(result[6], exit_command.ExitCommand)
 
 
 def test_parse_external_command():
@@ -122,3 +125,14 @@ def test_parse_from_set_command():
     assert len(result) == 1
     assert isinstance(result[0], echo_command.EchoCommand)
     assert result[0].args[0] == '1'
+
+
+def test_parse_grep_command():
+    parser_ = parser.Parser()
+
+    result = parser_.parse('grep "Минимальный" README.md')
+
+    assert len(result) == 1
+    assert isinstance(result[0], grep_command.GrepCommand)
+    assert result[0].args[0] == '"Минимальный"'
+    assert result[0].args[1] == 'README.md'
