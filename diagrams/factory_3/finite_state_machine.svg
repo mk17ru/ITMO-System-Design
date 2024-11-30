@@ -1,0 +1,147 @@
+<svg width="840" height="748" viewBox="0 0 630 561" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="translate(42.5300910953585,330.7392118004637) scale(0.4171499885179098)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-195.42 1347.71,-195.42 1347.71,4 -4,4"/>
+<!-- IDLE -->
+<g id="node1" class="node">
+<title>IDLE</title>
+<ellipse fill="none" stroke="black" cx="33.02" cy="-154" rx="33.02" ry="18"/>
+<text text-anchor="middle" x="33.02" y="-149.8" font-family="Times,serif" font-size="14.00">IDLE</text>
+</g>
+<!-- OPEN -->
+<g id="node2" class="node">
+<title>OPEN</title>
+<ellipse fill="none" stroke="black" cx="263.05" cy="-82" rx="36.25" ry="18"/>
+<text text-anchor="middle" x="263.05" y="-77.8" font-family="Times,serif" font-size="14.00">OPEN</text>
+</g>
+<!-- IDLE&#45;&gt;OPEN -->
+<g id="edge1" class="edge">
+<title>IDLE-&gt;OPEN</title>
+<path fill="none" stroke="black" d="M53.67,-139.85C62.59,-133.98 73.48,-127.54 84.05,-123.2 127.2,-105.48 179.53,-94.52 216.24,-88.4"/>
+<polygon fill="black" stroke="black" points="216.76,-91.86 226.08,-86.82 215.66,-84.95 216.76,-91.86"/>
+<text text-anchor="middle" x="134.8" y="-127.4" font-family="Times,serif" font-size="14.00">Открываем дверь</text>
+</g>
+<!-- READY_FOR_COOKING -->
+<g id="node3" class="node">
+<title>READY_FOR_COOKING</title>
+<ellipse fill="none" stroke="black" cx="577.32" cy="-122" rx="117.27" ry="18"/>
+<text text-anchor="middle" x="577.32" y="-117.8" font-family="Times,serif" font-size="14.00">READY_FOR_COOKING</text>
+</g>
+<!-- IDLE&#45;&gt;READY_FOR_COOKING -->
+<g id="edge4" class="edge">
+<title>IDLE-&gt;READY_FOR_COOKING</title>
+<path fill="none" stroke="black" d="M64.05,-160.87C70.61,-162.13 77.53,-163.27 84.05,-164 242.3,-181.67 285.2,-177.48 442.05,-150 460.11,-146.84 479.46,-143.04 497.68,-139.28"/>
+<polygon fill="black" stroke="black" points="498.3,-142.73 507.38,-137.26 496.88,-135.87 498.3,-142.73"/>
+<text text-anchor="middle" x="263.05" y="-178.82" font-family="Times,serif" font-size="14.00">Начать выбор опций</text>
+</g>
+<!-- OPEN&#45;&gt;READY_FOR_COOKING -->
+<g id="edge2" class="edge">
+<title>OPEN-&gt;READY_FOR_COOKING</title>
+<path fill="none" stroke="black" d="M295.49,-90.43C309.23,-93.85 325.6,-97.56 340.55,-100 378.14,-106.15 419.41,-110.73 456.77,-114.07"/>
+<polygon fill="black" stroke="black" points="456.46,-117.55 466.72,-114.93 457.06,-110.58 456.46,-117.55"/>
+<text text-anchor="middle" x="391.3" y="-116.44" font-family="Times,serif" font-size="14.00">Закрываем дверь</text>
+</g>
+<!-- READY_FOR_COOKING&#45;&gt;IDLE -->
+<g id="edge3" class="edge">
+<title>READY_FOR_COOKING-&gt;IDLE</title>
+<path fill="none" stroke="black" d="M473.71,-130.73C463.02,-131.54 452.32,-132.32 442.05,-133 309.37,-141.85 152.2,-149 77.56,-152.19"/>
+<polygon fill="black" stroke="black" points="77.66,-148.69 67.82,-152.61 77.96,-155.68 77.66,-148.69"/>
+<text text-anchor="middle" x="263.05" y="-150.38" font-family="Times,serif" font-size="14.00">Отмена</text>
+</g>
+<!-- READY_FOR_COOKING&#45;&gt;OPEN -->
+<g id="edge7" class="edge">
+<title>READY_FOR_COOKING-&gt;OPEN</title>
+<path fill="none" stroke="black" d="M534.19,-104.88C508.13,-95.22 473.72,-84.13 442.05,-79.2 397.47,-72.27 385.65,-78.37 340.55,-79.2 330.9,-79.38 320.57,-79.68 310.73,-80.02"/>
+<polygon fill="black" stroke="black" points="310.84,-76.51 300.97,-80.38 311.1,-83.51 310.84,-76.51"/>
+<text text-anchor="middle" x="391.3" y="-83.4" font-family="Times,serif" font-size="14.00">Открываем дверь</text>
+</g>
+<!-- READY_FOR_COOKING&#45;&gt;READY_FOR_COOKING -->
+<g id="edge6" class="edge">
+<title>READY_FOR_COOKING-&gt;READY_FOR_COOKING</title>
+<path fill="none" stroke="black" d="M544.11,-139.41C537.91,-149.09 548.98,-158 577.32,-158 593.7,-158 604.31,-155.02 609.15,-150.64"/>
+<polygon fill="black" stroke="black" points="612.6,-151.26 610.34,-140.91 605.65,-150.41 612.6,-151.26"/>
+<text text-anchor="middle" x="577.32" y="-162.2" font-family="Times,serif" font-size="14.00">Выбор времени и режима готовки</text>
+</g>
+<!-- COOKING -->
+<g id="node4" class="node">
+<title>COOKING</title>
+<ellipse fill="none" stroke="black" cx="928.33" cy="-82" rx="55.56" ry="18"/>
+<text text-anchor="middle" x="928.33" y="-77.8" font-family="Times,serif" font-size="14.00">COOKING</text>
+</g>
+<!-- READY_FOR_COOKING&#45;&gt;COOKING -->
+<g id="edge5" class="edge">
+<title>READY_FOR_COOKING-&gt;COOKING</title>
+<path fill="none" stroke="black" d="M682.64,-113.72C723.67,-110.09 771.15,-105.41 814.08,-100 831.5,-97.81 850.36,-94.99 867.59,-92.23"/>
+<polygon fill="black" stroke="black" points="867.85,-95.74 877.16,-90.69 866.73,-88.83 867.85,-95.74"/>
+<text text-anchor="middle" x="763.33" y="-114.75" font-family="Times,serif" font-size="14.00">Старт</text>
+</g>
+<!-- READY_FOR_COOKING&#45;&gt;COOKING -->
+<g id="edge8" class="edge">
+<title>COOKING-&gt;OPEN</title>
+<path fill="none" stroke="black" d="M874.96,-76.41C855.83,-74.62 834,-72.88 814.08,-72 603.83,-62.74 550.56,-58.33 340.55,-72 330.35,-72.66 319.44,-73.82 309.14,-75.12"/>
+<polygon fill="black" stroke="black" points="308.8,-71.63 299.35,-76.42 309.72,-78.57 308.8,-71.63"/>
+<text text-anchor="middle" x="577.32" y="-70.89" font-family="Times,serif" font-size="14.00">Открываем дверь</text>
+</g>
+<!-- COOKING&#45;&gt;OPEN -->
+<g id="edge9" class="edge">
+<title>COOKING-&gt;READY_FOR_COOKING</title>
+<path fill="none" stroke="black" d="M872.62,-80.37C854.04,-79.89 833.16,-79.44 814.08,-79.2 768.98,-78.64 757.16,-72.27 712.58,-79.2 685.12,-83.47 655.59,-92.38 631.24,-100.97"/>
+<polygon fill="black" stroke="black" points="630.07,-97.67 621.86,-104.36 632.46,-104.25 630.07,-97.67"/>
+<text text-anchor="middle" x="763.33" y="-83.4" font-family="Times,serif" font-size="14.00">Стоп</text>
+</g>
+<!-- DONE -->
+<g id="node5" class="node">
+<title>DONE</title>
+<ellipse fill="none" stroke="black" cx="1266.71" cy="-18" rx="37.86" ry="18"/>
+<text text-anchor="middle" x="1266.71" y="-13.8" font-family="Times,serif" font-size="14.00">DONE</text>
+</g>
+<!-- COOKING&#45;&gt;DONE -->
+<g id="edge10" class="edge">
+<title>COOKING-&gt;DONE</title>
+<path fill="none" stroke="black" d="M963.42,-67.71C985.6,-58.99 1015.35,-48.38 1042.58,-42.2 1101.83,-28.76 1171.68,-22.72 1217.24,-20.04"/>
+<polygon fill="black" stroke="black" points="1217.26,-23.55 1227.05,-19.5 1216.87,-16.56 1217.26,-23.55"/>
+<text text-anchor="middle" x="1124.83" y="-46.4" font-family="Times,serif" font-size="14.00">Время истекло</text>
+</g>
+<!-- PAUSE -->
+<g id="node6" class="node">
+<title>PAUSE</title>
+<ellipse fill="none" stroke="black" cx="1266.71" cy="-122" rx="41.62" ry="18"/>
+<text text-anchor="middle" x="1266.71" y="-117.8" font-family="Times,serif" font-size="14.00">PAUSE</text>
+</g>
+<!-- COOKING&#45;&gt;PAUSE -->
+<g id="edge13" class="edge">
+<title>COOKING-&gt;PAUSE</title>
+<path fill="none" stroke="black" d="M978.02,-90.39C997.99,-93.66 1021.36,-97.27 1042.58,-100 1101.18,-107.54 1168.73,-113.87 1214.02,-117.78"/>
+<polygon fill="black" stroke="black" points="1213.55,-121.25 1223.81,-118.61 1214.14,-114.28 1213.55,-121.25"/>
+<text text-anchor="middle" x="1124.83" y="-121.31" font-family="Times,serif" font-size="14.00">Приостанавливаем готовку</text>
+</g>
+<!-- DONE&#45;&gt;OPEN -->
+<g id="edge12" class="edge">
+<title>DONE-&gt;OPEN</title>
+<path fill="none" stroke="black" d="M1228.59,-17.01C1184.3,-16.01 1108.02,-14.91 1042.58,-17 730.09,-27.01 649.22,-12.23 340.55,-62 329.06,-63.85 316.8,-66.67 305.53,-69.61"/>
+<polygon fill="black" stroke="black" points="304.85,-66.17 296.12,-72.17 306.68,-72.92 304.85,-66.17"/>
+<text text-anchor="middle" x="763.33" y="-28" font-family="Times,serif" font-size="14.00">Открываем дверь</text>
+</g>
+<!-- DONE&#45;&gt;DONE -->
+<g id="edge11" class="edge">
+<title>DONE-&gt;DONE</title>
+<path fill="none" stroke="black" d="M1243.25,-32.42C1235.06,-43.17 1242.88,-54 1266.71,-54 1281.97,-54 1290.67,-49.55 1292.79,-43.53"/>
+<polygon fill="black" stroke="black" points="1296.22,-42.82 1290.51,-33.89 1289.41,-44.43 1296.22,-42.82"/>
+<text text-anchor="middle" x="1266.71" y="-58.2" font-family="Times,serif" font-size="14.00">Подаем игнал готовности</text>
+</g>
+<!-- PAUSE&#45;&gt;READY_FOR_COOKING -->
+<g id="edge15" class="edge">
+<title>PAUSE-&gt;READY_FOR_COOKING</title>
+<path fill="none" stroke="black" d="M1232.54,-132.7C1224.31,-134.9 1215.45,-136.88 1207.08,-138 989.23,-167.19 932.17,-140.68 712.58,-131 707.04,-130.76 701.36,-130.48 695.63,-130.18"/>
+<polygon fill="black" stroke="black" points="696.25,-126.71 686.07,-129.65 695.87,-133.7 696.25,-126.71"/>
+<text text-anchor="middle" x="928.33" y="-155.47" font-family="Times,serif" font-size="14.00">Отменяем текущий план готовки</text>
+</g>
+<!-- PAUSE&#45;&gt;COOKING -->
+<g id="edge14" class="edge">
+<title>PAUSE-&gt;COOKING</title>
+<path fill="none" stroke="black" d="M1249.39,-105.67C1238.45,-95.92 1223.14,-84.44 1207.08,-79.2 1134.23,-55.44 1044.8,-62.25 987.45,-70.84"/>
+<polygon fill="black" stroke="black" points="987.25,-67.33 977.92,-72.34 988.34,-74.25 987.25,-67.33"/>
+<text text-anchor="middle" x="1124.83" y="-83.4" font-family="Times,serif" font-size="14.00">Продолжаем готовку</text>
+</g>
+</g>
+</svg>
