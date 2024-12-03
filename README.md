@@ -43,7 +43,7 @@ poetry run pytest -vv --showlocals
 ## Запуск
 
 ```
-poerty install
+poetry install
 python3 main.py
 ```
 
