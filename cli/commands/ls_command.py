@@ -4,22 +4,22 @@ import cli.commands.base_command as base_command
 
 
 class LsCommand(base_command.BaseCommand):
-    """Логика для команды `ls`."""
+    """Logic for the `ls` command."""
 
     def __call__(self) -> int:
-        """Выполнение команды `ls` для отображения содержимого текущей директории (или указанной)."""
-        # Если передан аргумент, будем считать это путем к каталогу.
+        """Executes the `ls` command to display the contents of the current directory (or the specified one)."""
+        # If an argument is provided, treat it as the directory path
         directory = self.args[0] if len(self.args) > 0 else os.getcwd()
 
         try:
-            # Получаем список файлов и директорий в каталоге.
+            # Get the list of files and directories in the specified directory
             for item in os.listdir(directory):
                 self.stdout.write(f'{item}\n')
 
-            return 0  # Успешное завершение.
+            return 0  # Successful completion
         except FileNotFoundError:
-            self.stdout.write(f'Ошибка: Директория {directory} не найдена.\n')
-            return 1  # Ошибка - директория не найдена.
+            self.stdout.write(f'Error: Directory {directory} not found.\n')
+            return 1  # Error - directory not found
         except PermissionError:
-            self.stdout.write(f'Ошибка: Недостаточно прав для доступа к {directory}.\n')
-            return 1  # Ошибка доступа.
+            self.stdout.write(f'Error: Insufficient permissions to access {directory}.\n')
+            return 1  # Access error

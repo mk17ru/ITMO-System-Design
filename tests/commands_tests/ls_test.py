@@ -41,7 +41,7 @@ class TestLsCommand:
 
         ret_code = ls_command()
 
-        assert ls_command.stdout.getvalue() == 'Ошибка: Директория /non_existent/directory не найдена.\n'
+        assert ls_command.stdout.getvalue() == 'Error: Directory /non_existent/directory not found.\n'
         assert ret_code == 1
 
     @patch('os.listdir', side_effect=PermissionError)
@@ -51,5 +51,5 @@ class TestLsCommand:
 
         ret_code = ls_command()
 
-        assert ls_command.stdout.getvalue() == 'Ошибка: Недостаточно прав для доступа к /restricted/directory.\n'
+        assert ls_command.stdout.getvalue() == 'Error: Insufficient permissions to access /restricted/directory.\n'
         assert ret_code == 1
