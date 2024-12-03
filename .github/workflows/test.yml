@@ -2,9 +2,13 @@ name: Run python tests
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
 
 jobs:
   build:
@@ -12,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.12"]
+        python-version: [ "3.12" ]
 
     steps:
       - uses: actions/checkout@v4

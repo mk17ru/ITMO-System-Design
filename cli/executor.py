@@ -27,6 +27,8 @@ class Executor:
         error_message = None
         try:
             for i, command in enumerate(parsed_commands):
+                command.stdout = io.StringIO()
+
                 if i + 1 == len(parsed_commands):
                     command.stdout = Executor.output_data
                 status_code = command()
