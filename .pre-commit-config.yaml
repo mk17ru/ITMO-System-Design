@@ -3,7 +3,7 @@ repos:
     hooks:
       - id: py-docstrings
         name: py-docstrings
-        entry: poetry run doq -w -d ./cli -r -t ./docs/pydoq_templates --exclude '*/__init__.py'
+        entry: poetry run doq -w -d ./cli -r -t ./docs/pydoq_templates
         language: system
         types: [python]
         pass_filenames: false
