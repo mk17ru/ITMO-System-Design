@@ -1,6 +1,7 @@
 import re
 import shlex
 import subprocess
+import typing
 
 import cli.commands.base_command as base_command
 import cli.commands.cat_command as cat_command
@@ -61,10 +62,16 @@ class Parser:
             raise InvalidCommandError(f'Command {input_cmd} is not valid Linux command!')
         return None
 
-    def replace_variables(self, text):
+    def _replace_variables(self, text: str) -> typing.Any:
+        """Summary of replace_variables.
+
+        Args:
+            text : Text to replace variables
+        """
         pattern = r'\$([A-Za-z_]\w*)'
 
-        def replacer(match):
+        def replacer(match: typing.Any) -> str:
+            """Summary of replacer."""
             key = match.group(1)
             return self.storage.get(key)
 
@@ -83,10 +90,7 @@ class Parser:
         result: list[base_command.BaseCommand] = []
         for cmd_line in cli_input.split(Parser.PIPE_SYMBOL):
             cmd_line = cmd_line.strip()
-            if not cmd_line.startswith('.'):
-                cmd_line_splitted = shlex.split(cmd_line)
-            else:
-                cmd_line_splitted = [cmd_line]
+            cmd_line_splitted = shlex.split(cmd_line) if not cmd_line.startswith('.') else [cmd_line]
             if len(cmd_line_splitted) == 0:
                 continue
             filtered_tokens = []
@@ -96,7 +100,7 @@ class Parser:
                     self.storage.set(key, value)
                     continue
                 else:
-                    token = self.replace_variables(token)
+                    token = self._replace_variables(token)
                     filtered_tokens.append(token)
             if len(filtered_tokens) == 0:
                 continue
