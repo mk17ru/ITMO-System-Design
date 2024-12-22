@@ -1,4 +1,5 @@
 import re
+import shlex
 import subprocess
 
 import cli.commands.base_command as base_command
@@ -60,6 +61,16 @@ class Parser:
             raise InvalidCommandError(f'Command {input_cmd} is not valid Linux command!')
         return None
 
+    def replace_variables(self, text):
+        pattern = r'\$([A-Za-z_]\w*)'
+
+        def replacer(match):
+            key = match.group(1)
+            return self.storage.get(key)
+
+        # Замена всех вхождений переменных в тексте
+        return re.sub(pattern, replacer, text)
+
     def parse(self, cli_input: str) -> list[base_command.BaseCommand]:
         """Summary of parse.
 
@@ -71,8 +82,11 @@ class Parser:
         """
         result: list[base_command.BaseCommand] = []
         for cmd_line in cli_input.split(Parser.PIPE_SYMBOL):
-            cmd_line.strip()
-            cmd_line_splitted = cmd_line.split()
+            cmd_line = cmd_line.strip()
+            if not cmd_line.startswith('.'):
+                cmd_line_splitted = shlex.split(cmd_line)
+            else:
+                cmd_line_splitted = [cmd_line]
             if len(cmd_line_splitted) == 0:
                 continue
             filtered_tokens = []
@@ -81,11 +95,8 @@ class Parser:
                     key, value = token.split('=', 1)
                     self.storage.set(key, value)
                     continue
-                elif re.match(r'^\$[A-Za-z_]\w*$', token):
-                    key = token[1:]
-                    val = self.storage.get(key)
-                    filtered_tokens.append(val)
                 else:
+                    token = self.replace_variables(token)
                     filtered_tokens.append(token)
             if len(filtered_tokens) == 0:
                 continue
