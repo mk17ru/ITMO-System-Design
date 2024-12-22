@@ -23,12 +23,12 @@ def test_parse_command_with_argument():
 
 def test_parse_command_with_argument_quotes():
     parser_ = parser.Parser()
-    result = parser_.parse("cat 'file.txt'")
+    result = parser_.parse("cat 'file'")
 
     assert len(result) == 1
     assert isinstance(result[0], cat_command.CatCommand)
     assert len(result[0].args) == 1
-    assert result[0].args[0] == "'file.txt'"
+    assert result[0].args[0] == 'file'
 
 
 def test_parse_command_without_arguments():
@@ -128,6 +128,71 @@ def test_parse_from_set_command():
     assert result[0].args[0] == '1'
 
 
+def test_parse_from_set_quote_double():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse('x=1 | echo "123$x"')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1231'
+
+
+def test_parse_from_set_quote():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse("x=1 | echo '123$x'")
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '1231'
+
+
+def test_parse_from_set_quote_whitespace():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+
+    result = parser_.parse("x=1 | echo '1$x 23'")
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '11 23'
+
+
+def test_parse_from_set_multi_quote_double():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=1')
+    parser_.parse('y=9')
+
+    result = parser_.parse('x=1 | echo "123$x$y $x test"')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '12319 1 test'
+
+
+def test_parse_from_set_quote_command_several():
+    parser_ = parser.Parser()
+
+    parser_.parse('x=rrr')
+    result = parser_.parse('"echo" 123')
+    result_quotes = parser_.parse('echo " \'$x\' "')
+
+    assert len(result) == 1
+    assert isinstance(result[0], echo_command.EchoCommand)
+    assert result[0].args[0] == '123'
+
+    assert len(result_quotes) == 1
+    assert isinstance(result_quotes[0], echo_command.EchoCommand)
+    assert result_quotes[0].args[0] == " 'rrr' "
+
+
 def test_parse_grep_command():
     parser_ = parser.Parser()
 
@@ -135,5 +200,15 @@ def test_parse_grep_command():
 
     assert len(result) == 1
     assert isinstance(result[0], grep_command.GrepCommand)
-    assert result[0].args[0] == '"Минимальный"'
+    assert result[0].args[0] == 'Минимальный'
     assert result[0].args[1] == 'README.md'
+
+
+def test_parse_cat_command():
+    parser_ = parser.Parser()
+
+    result = parser_.parse('cat "README".md')
+
+    assert len(result) == 1
+    assert isinstance(result[0], cat_command.CatCommand)
+    assert result[0].args[0] == 'README.md'
